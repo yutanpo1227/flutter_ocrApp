@@ -12,6 +12,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 Future main() async{
   await dotenv.load(fileName: '.env');
   OpenAI.apiKey = dotenv.get('API_KEY');
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
