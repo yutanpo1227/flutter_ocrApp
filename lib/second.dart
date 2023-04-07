@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:dart_openai/openai.dart';
+import 'dart:io';
 
 class NextPage extends StatefulWidget {
   NextPage(XFile? this.image,String? this.lang);
@@ -37,7 +36,7 @@ class _NextPageState extends State<NextPage>{
   Future ocr_ja () async {
     final InputImage imageFile = InputImage.fromFilePath(image!.path);
     final textRecognizer =
-        TextRecognizer(script: TextRecognitionScript.japanese);
+      TextRecognizer(script: TextRecognitionScript.japanese);
     final RecognizedText recognizedText =
         await textRecognizer.processImage(imageFile);
     String text = '';
@@ -55,7 +54,7 @@ class _NextPageState extends State<NextPage>{
   Future ocr_en () async {
     final InputImage imageFile = InputImage.fromFilePath(image!.path);
     final textRecognizer =
-        TextRecognizer(script: TextRecognitionScript.latin);
+      TextRecognizer(script: TextRecognitionScript.latin);
     final RecognizedText recognizedText =
         await textRecognizer.processImage(imageFile);
     String text = '';
@@ -92,13 +91,29 @@ class _NextPageState extends State<NextPage>{
   }
 
   Future main() async{
-    if(lang == 'ja'){
-      await ocr_ja();
+    try{
+      if(lang == 'ja'){
+        await ocr_ja();
+      }
+      else{
+        await ocr_en();
+      }
+    } on Exception{
+      result = Text("読み取りエラー、対応していない言語またはテキストの読み取りに失敗しました");
+      return;
     }
-    else{
-      await ocr_en();
+    if(result.data == '')
+    {
+      result = Text("読み取りエラー、対応していない言語またはテキストの読み取りに失敗しました");
+      return;
     }
-    listenChatGPT(result.data!);
+    try{
+      listenChatGPT(result.data!);
+    }on Exception{
+      answerText = "リクエストエラー、もう一度やり直してください";
+    }
+    if(answerText == '')
+      answerText = "リクエストエラー、もう一度やり直してください";
   }
 
   @override
@@ -134,7 +149,7 @@ class _NextPageState extends State<NextPage>{
             //mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment:CrossAxisAlignment.center,
             children: <Widget>[
-              if (image != null) 
+              if (image != null)
                 Container(
                   height: 350,
                   child: Image.file(File(image!.path))

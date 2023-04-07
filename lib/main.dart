@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:dart_openai/openai.dart';
 import 'second.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'pick_export.dart';
+import 'package:cross_file/cross_file.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 
 Future main() async{
@@ -61,12 +60,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   XFile? image;
-  final picker = ImagePicker();
   Text result = Text('');
   late OpenAI openAI;
   String answerText = '';
   bool ja_flag = true;
   bool en_flag = false;
+  String first_message = "画像と言語を選択してください";
 
   void flagChange_ja(bool? e)
   {
@@ -86,38 +85,25 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future cropImage(XFile img) async {
     final croppedFile = await ImageCropper().cropImage(
-        sourcePath: img.path,
-        );
-        if (croppedFile != null) {
-          this.image = XFile(croppedFile.path);
-        }
-      setState(() {
-      });
+      sourcePath: img.path,
+      uiSettings: [
+      AndroidUiSettings(
+          toolbarTitle: 'Cropper',
+          toolbarColor: Colors.deepOrange,
+          toolbarWidgetColor: Colors.white,
+          initAspectRatio: CropAspectRatioPreset.original,
+          lockAspectRatio: false),
+      IOSUiSettings(
+        title: 'Cropper',
+      ),
+      WebUiSettings(
+        context: context,
+      ),
+      ]
+    );
+    if (croppedFile != null) {
+      this.image =  XFile(croppedFile.path);
     }
-
-  // 画像をギャラリーから選ぶ関数
-  Future pickImage() async {
-    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    // 画像がnullの場合戻る
-    if (image == null) return;
-
-    final imageTemp = image;
-
-    await cropImage(imageTemp);
-
-    setState((){});
-  }
-  // カメラを使う関数
-  Future pickImageCamera() async {
-    final image = await ImagePicker().pickImage(source: ImageSource.camera);
-    // 画像がnullの場合戻る
-    if (image == null) return;
-
-    final imageTemp = image;
-
-    await cropImage(imageTemp);
-
-    setState((){});
   }
 
   Future main(String mode) async{
@@ -128,16 +114,21 @@ class _MyHomePageState extends State<MyHomePage> {
     else{
       lang = 'en';
     }
-    if(mode == "gallery"){
-      await pickImage();
-    }
-    if(mode == "camera"){
-      await pickImageCamera();
-    }
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => NextPage(image,lang))
+    try{
+      if(mode == "gallery"){
+        this.image = await Pick().pickImage();
+      }
+      if(mode == "camera"){
+        this.image = await Pick().pickImageCamera();
+      }
+      await cropImage(this.image!);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => NextPage(this.image,lang))
     );
+    }on Exception{
+      first_message = "読み込みエラー、もう一度画像を選択してください";
+    }
   }
 
   // @override

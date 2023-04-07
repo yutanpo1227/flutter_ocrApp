@@ -32,15 +32,18 @@ dependencies:
     sdk: flutter
   google_mlkit_text_recognition : ^0.5.0
   image_picker: ^0.8.4+4
+  image_picker_for_web: any
+  image_picker_platform_interface: ^2.6.3
   image_cropper: ^3.0.1
   dart_openai: ^1.8.0
   translator: ^0.1.7
+  cross_file: any
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   firebase_core: ^2.8.0
-  firebase_ml_model_downloader: ^0.2.0+13
+  #firebase_ml_model_downloader: ^0.2.0+13
   flutter_dotenv: ^5.0.2
 
 dev_dependencies:
@@ -64,6 +67,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - .env
 
   # To add assets to your application, add an assets section, like this:
   # assets:

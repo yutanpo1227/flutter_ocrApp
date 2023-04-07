@@ -42,7 +42,7 @@ packages:
     source: hosted
     version: "1.17.0"
   cross_file:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: cross_file
       sha256: "0b0036e8cccbfbe0555fd83c1d31a6f30b77a96b598b35a5d36dd41f718695e9"
@@ -97,22 +97,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.2"
-  firebase_ml_model_downloader:
-    dependency: "direct main"
-    description:
-      name: firebase_ml_model_downloader
-      sha256: "3fa090e60c7e3d86a8280fc1c5ad6ad2aac1a600393f480c8074f1f8ec2b5092"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0+13"
-  firebase_ml_model_downloader_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_ml_model_downloader_platform_interface
-      sha256: e15179c87b0877b32410ed55a4a617a5fc5215a7189e8f557daff0c2e14e9326
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.1+32"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -225,7 +209,7 @@ packages:
     source: hosted
     version: "0.8.6+4"
   image_picker_for_web:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: image_picker_for_web
       sha256: "98f50d6b9f294c8ba35e25cc0d13b04bfddd25dbc8d32fa9d566a6572f2c081c"
@@ -241,7 +225,7 @@ packages:
     source: hosted
     version: "0.8.7+1"
   image_picker_platform_interface:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: image_picker_platform_interface
       sha256: "1991219d9dbc42a99aff77e663af8ca51ced592cd6685c9485e3458302d3d4f8"

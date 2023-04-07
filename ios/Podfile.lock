@@ -1,15 +1,8 @@
 PODS:
   - Firebase/CoreOnly (10.6.0):
     - FirebaseCore (= 10.6.0)
-  - Firebase/MLModelDownloader (10.6.0):
-    - Firebase/CoreOnly
-    - FirebaseMLModelDownloader (~> 10.6.0-beta)
   - firebase_core (2.8.0):
     - Firebase/CoreOnly (= 10.6.0)
-    - Flutter
-  - firebase_ml_model_downloader (0.2.0-13):
-    - Firebase/MLModelDownloader (= 10.6.0)
-    - firebase_core
     - Flutter
   - FirebaseCore (10.6.0):
     - FirebaseCoreInternal (~> 10.0)
@@ -17,17 +10,6 @@ PODS:
     - GoogleUtilities/Logger (~> 7.8)
   - FirebaseCoreInternal (10.6.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseInstallations (10.6.0):
-    - FirebaseCore (~> 10.0)
-    - GoogleUtilities/Environment (~> 7.8)
-    - GoogleUtilities/UserDefaults (~> 7.8)
-    - PromisesObjC (~> 2.1)
-  - FirebaseMLModelDownloader (10.6.0-beta):
-    - FirebaseCore (~> 10.0)
-    - FirebaseInstallations (~> 10.0)
-    - GoogleDataTransport (~> 9.2)
-    - GoogleUtilities/Logger (~> 7.8)
-    - SwiftProtobuf (~> 1.19)
   - Flutter (1.0.0)
   - google_mlkit_commons (0.2.0):
     - Flutter
@@ -131,12 +113,10 @@ PODS:
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.2.0)
   - Protobuf (3.22.1)
-  - SwiftProtobuf (1.21.0)
   - TOCropViewController (2.6.1)
 
 DEPENDENCIES:
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
-  - firebase_ml_model_downloader (from `.symlinks/plugins/firebase_ml_model_downloader/ios`)
   - Flutter (from `Flutter`)
   - google_mlkit_commons (from `.symlinks/plugins/google_mlkit_commons/ios`)
   - google_mlkit_text_recognition (from `.symlinks/plugins/google_mlkit_text_recognition/ios`)
@@ -152,8 +132,6 @@ SPEC REPOS:
     - Firebase
     - FirebaseCore
     - FirebaseCoreInternal
-    - FirebaseInstallations
-    - FirebaseMLModelDownloader
     - GoogleDataTransport
     - GoogleMLKit
     - GoogleToolboxForMac
@@ -172,14 +150,11 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - Protobuf
-    - SwiftProtobuf
     - TOCropViewController
 
 EXTERNAL SOURCES:
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
-  firebase_ml_model_downloader:
-    :path: ".symlinks/plugins/firebase_ml_model_downloader/ios"
   Flutter:
     :path: Flutter
   google_mlkit_commons:
@@ -194,11 +169,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Firebase: f13680471b021937f2230ea8503c7809d8c29806
   firebase_core: 58542d7399889ebdbb034baa72d081e54c5c814d
-  firebase_ml_model_downloader: 2e27dd2765aa17ae7b1a866924c52457fd081ac9
   FirebaseCore: fa80ad16a62d52f67274b5b88304c3a318bbf9a4
   FirebaseCoreInternal: c7cd505e2136811096b225ac388d6254a2622362
-  FirebaseInstallations: 13dde135fa0524e15bddb133ccc8465c53a1b3f3
-  FirebaseMLModelDownloader: 1c4ecd8f477478adb7f2751a109bf12d4abf25ef
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   google_mlkit_commons: e9070f57232c3a3e4bd42fdfa621bb1f4bb3e709
   google_mlkit_text_recognition: 9967360384e93b09686aca67fc9f13f9a957d770
@@ -222,7 +194,6 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   Protobuf: d7f7c8329edf5eb8af65547a8ba3e9c1cee927d5
-  SwiftProtobuf: afced68785854575756db965e9da52bbf3dc45e7
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
 
 PODFILE CHECKSUM: 70f7d970c9e7ae0e5c1674aba7382b9c2c32989b
